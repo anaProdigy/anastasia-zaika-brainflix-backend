@@ -1,0 +1,29 @@
+{
+  "name": "anastasia-zaika-brainflix-backend",
+  "version": "1.0.0",
+  "description": "Backend for Brainflix Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anaProdigy/anastasia-zaika-brainflix-backend.git"
+  },
+  "author": "\"Anastasia\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anaProdigy/anastasia-zaika-brainflix-backend/issues"
+  },
+  "homepage": "https://github.com/anaProdigy/anastasia-zaika-brainflix-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

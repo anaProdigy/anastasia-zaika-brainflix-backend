@@ -7,15 +7,14 @@ const data = require(videosJSONFile);
 
 const { getNewId, writeJSONFile, timestamp } = require("../helper/helper");
 
-
-router
-.post("/:id/comments", (req, res) => {
+router.post("/:id/comments", (req, res) => {
   const videoId = req.params.id;
+  console.log(req.body);
   const selectedVideo = data.find((video) => video.id === videoId);
-  newComment = {
+  const newComment = {
     name: req.body.name,
     comment: req.body.comment,
-    id: req.body.id,
+    id: getNewId(),
     likes: 0,
     timestamp: timestamp(),
   };
@@ -26,25 +25,26 @@ router
       return (data = selectedVideo);
     }
   });
-   writeJSONFile(videosJSONFile, data);
-   res.status(201).json(newVComment);
+  writeJSONFile(videosJSONFile, data);
+  res.status(201).json(newComment);
 });
 
-router
-.delete("/:videoId/comments/:commentId", (req, res) => {
-        const videoId = req.params.videoId
-        const commentId = req.params.commentId
-        const selectedVideo = data.find(video => video.id === videoId)
-        const selectedComment = selectedVideo.comments.find(comment => comment.id === commentId)
-        const commentIndex = selectedVideo.comments.indexOf(selectedComment)
-        selectedVideo.comments.splice(commentIndex,1)
-        //find the video in the array and reassign old data to new data without deleted comment
-        data.map(data => {
-            if (data.id === selectedVideo.id){
-                return data = selectedVideo
-            }
-        })
-       writeJSONFile(videosJSONFile, data);
+router.delete("/:videoId/comments/:commentId", (req, res) => {
+  const videoId = req.params.videoId;
+  const commentId = req.params.commentId;
+  const selectedVideo = data.find((video) => video.id === videoId);
+  const selectedComment = selectedVideo.comments.find(
+    (comment) => comment.id === commentId
+  );
+  const commentIndex = selectedVideo.comments.indexOf(selectedComment);
+  selectedVideo.comments.splice(commentIndex, 1);
+  //find the video in the array and reassign old data to new data without deleted comment
+  data.map((data) => {
+    if (data.id === selectedVideo.id) {
+      return (data = selectedVideo);
+    }
+  });
+  writeJSONFile(videosJSONFile, data);
   res.status(201).json(selectedComment);
-    })
+});
 module.exports = router;
